@@ -1,5 +1,4 @@
 package com.smartevent_backend.project.dto;
 
-public class UserDto {
-
+public class TokenResponse {
 }
