@@ -3,7 +3,6 @@ package com.smartevent_backend.project.controller;
 import com.smartevent_backend.project.dto.LoginRequest;
 import com.smartevent_backend.project.dto.RegisterRequest;
 import com.smartevent_backend.project.dto.UserDto;
-import com.smartevent_backend.project.model.User;
 import com.smartevent_backend.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
