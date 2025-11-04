@@ -19,7 +19,7 @@ public class Right {
     private String rightId;
     @Column(unique = true, length = 30)
     private String name;
-    @Column(unique = true, length = 30)
+    @Column(length = 30)
     private String groupName;
     @ManyToMany(mappedBy = "rights")
     private List<Role> role;

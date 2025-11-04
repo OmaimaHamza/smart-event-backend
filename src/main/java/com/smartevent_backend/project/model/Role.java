@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Role {
     @Id
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 50)
     private String roleId;
     @Column(nullable = false, unique = true, length = 50)
     private String name;

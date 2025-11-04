@@ -18,6 +18,6 @@ import java.util.List;
 public interface UserService {
     public UserDto register(RegisterRequest user);
     public UserDto login(LoginRequest loginRequest);
-    public List<User> getUsers();
+    public List<UserDto> getUsers();
 
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,10 +21,14 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public List<User> getUsers(){
+    public List<UserDto> getUsers(){
+        List<UserDto> dtos=new ArrayList<>();
         List<User> users=userRepository.findAll();
-        if(users.isEmpty()) throw new UserNotFound("No user found");
-        return userRepository.findAll();
+        for(User user:users){
+            dtos.add(convertToDto(user));
+        }
+        if(dtos.isEmpty()) throw new UserNotFound("No user found");
+        return dtos;
     }
     public UserDto register(RegisterRequest user){
         if(!userRepository.existsByEmail(user.getEmail())){
