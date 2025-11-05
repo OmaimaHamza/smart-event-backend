@@ -26,7 +26,6 @@ public class RegisterRequest {
     private String password;
     @NotBlank(message="Confirm password is required")
     private String confirmPassword;
-
     private String profile;
 
 }

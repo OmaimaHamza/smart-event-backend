@@ -2,7 +2,9 @@ package com.smartevent_backend.project.serviceImpl;
 
 import com.smartevent_backend.project.dto.LoginRequest;
 import com.smartevent_backend.project.dto.RegisterRequest;
+import com.smartevent_backend.project.dto.ResetPasswordRequest;
 import com.smartevent_backend.project.dto.UserDto;
+import com.smartevent_backend.project.exception.FieldNotFound;
 import com.smartevent_backend.project.exception.InvalideCredentials;
 import com.smartevent_backend.project.exception.UserAlreadyExist;
 import com.smartevent_backend.project.exception.UserNotFound;
@@ -30,6 +32,18 @@ public class UserServiceImpl implements UserService {
         if(dtos.isEmpty()) throw new UserNotFound("No user found");
         return dtos;
     }
+
+    @Override
+    public UserDto resetPassword(ResetPasswordRequest resetPasswordRequest) {
+            User user=userRepository.findByEmail(resetPasswordRequest.getEmail());
+            if(user!=null && passwordEncoder.matches(resetPasswordRequest.getOldPassword(), user.getPassword())){
+                user.setPassword(passwordEncoder.encode(resetPasswordRequest.getNewPassword()));
+                userRepository.save(user);
+                return convertToDto(user);
+            }
+            else throw new FieldNotFound("email or password is incorrect");
+    }
+
     public UserDto register(RegisterRequest user){
         if(!userRepository.existsByEmail(user.getEmail())){
             if(!user.getPassword().equals(user.getConfirmPassword())) {
